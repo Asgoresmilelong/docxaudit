@@ -21,6 +21,28 @@ _ANSI = {
 _LABEL = {"error": "错误", "warn": "警告", "info": "提示"}
 
 
+def ensure_utf8_console() -> None:
+    """让 stdout/stderr 能输出中文。
+
+    Windows 控制台和 CI 管道默认是 cp1252 / GBK，直接 print 中文会抛
+    UnicodeEncodeError；这里能改就改成 UTF-8，改不了（比如被重定向到
+    StringIO）就原样保留。
+    """
+    for stream in (sys.stdout, sys.stderr):
+        if stream is None:
+            continue
+        encoding = (getattr(stream, "encoding", None) or "").lower().replace("-", "").replace("_", "")
+        if encoding == "utf8":
+            continue
+        reconfigure = getattr(stream, "reconfigure", None)
+        if reconfigure is None:
+            continue
+        try:
+            reconfigure(encoding="utf-8", errors="replace")
+        except (ValueError, OSError):
+            pass
+
+
 def _supports_color(stream) -> bool:
     if os.environ.get("NO_COLOR"):
         return False

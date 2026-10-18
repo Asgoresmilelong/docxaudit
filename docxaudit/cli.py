@@ -8,7 +8,7 @@ from pathlib import Path
 
 from . import __version__
 from .loader import load_docx
-from .report import print_report
+from .report import ensure_utf8_console, print_report
 from .rules import RULES, audit
 
 
@@ -71,6 +71,7 @@ def cmd_check(args: argparse.Namespace) -> int:
 
 
 def main(argv: list[str] | None = None) -> int:
+    ensure_utf8_console()
     parser = build_parser()
     args = parser.parse_args(argv)
     if args.command == "rules":

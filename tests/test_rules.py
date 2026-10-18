@@ -282,6 +282,22 @@ class TestCli(Base):
             self.assertEqual(cli_main(["rules"]), 0)
         self.assertIn("R6", buf.getvalue())
 
+    def test_non_utf8_console_does_not_crash(self):
+        """Windows / CI 管道默认 cp1252，之前这里会抛 UnicodeEncodeError。"""
+        doc = Docx()
+        doc.add_paragraph("图 1 结构示意")
+        path = self.save(doc)
+
+        raw = io.BytesIO()
+        stream = io.TextIOWrapper(raw, encoding="cp1252", errors="strict")
+        with contextlib.redirect_stdout(stream):
+            code = cli_main(["check", str(path), "--no-fail"])
+        stream.flush()
+
+        self.assertEqual(code, 0)
+        self.assertIn("docxaudit", raw.getvalue().decode("utf-8"))
+        stream.detach()
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "docxaudit"
+version = "0.1.0"
+description = "Word 文档格式体检：标题层级、题注编号、交叉引用、参考文献、字体与行距"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+keywords = ["docx", "ooxml", "lint", "thesis", "word", "格式检查"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Topic :: Text Processing :: Markup",
+    "Topic :: Office/Business :: Office Suites",
+    "License :: OSI Approved :: MIT License",
+]
+dependencies = ["lxml>=4.9"]
+
+[project.optional-dependencies]
+dev = ["python-docx>=1.1"]
+
+[project.scripts]
+docxaudit = "docxaudit.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["docxaudit*"]

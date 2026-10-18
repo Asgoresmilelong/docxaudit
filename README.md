@@ -102,6 +102,8 @@ for f in check("报告.docx"):
 
 `docxaudit` 因此自己写了一层解析（`loader.py`），用 `lxml` 读 `word/document.xml` 和 `word/styles.xml`，把结果收敛成 `Paragraph` / `Run` 结构，规则层只面对这些结构，不碰 XML。
 
+完整的踩坑记录（含一次 Windows CI 上的 `UnicodeEncodeError` 事故复盘）见 [docs/why-read-ooxml-directly.md](docs/why-read-ooxml-directly.md)。
+
 ## 局限（说在前面）
 
 - 只支持 `.docx`；`.doc` 请先用 Word / LibreOffice 另存。

@@ -1,5 +1,9 @@
 # docxaudit
 
+[![ci](https://github.com/Asgoresmilelong/docxaudit/actions/workflows/ci.yml/badge.svg)](https://github.com/Asgoresmilelong/docxaudit/actions/workflows/ci.yml)
+[![license: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![python](https://img.shields.io/badge/python-3.9%2B-blue.svg)](pyproject.toml)
+
 **Word 文档格式体检**：把 .docx 里那些「肉眼要翻一百页才能发现」的格式问题，一条命令查出来。
 
 ```bash
@@ -108,7 +112,7 @@ for f in check("报告.docx"):
 ## 开发
 
 ```bash
-python -m unittest discover -s tests -t .   # 26 个用例
+python -m unittest discover -s tests -t .   # 27 个用例
 python examples/make_sample.py              # 生成埋了 6 处错误的示例文档
 ```
 

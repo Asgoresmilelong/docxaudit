@@ -40,12 +40,18 @@ docxaudit · sample-broken.docx
 ## 安装
 
 ```bash
-pip install docxaudit
-# 或从源码
+pip install git+https://github.com/Asgoresmilelong/docxaudit
+```
+
+或从源码：
+
+```bash
+git clone https://github.com/Asgoresmilelong/docxaudit
+cd docxaudit
 pip install -e ".[dev]"
 ```
 
-只依赖 `lxml`；测试用 `python-docx` 现场生成夹具，不需要任何样本文件。
+只依赖 `lxml`；测试用 `python-docx` 现场生成夹具，不需要任何样本文件。（PyPI 发布后可简化为 `pip install docxaudit`。）
 
 ## 用法
 
